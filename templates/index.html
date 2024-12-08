@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlantCare Detect and Cure</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Bootstrap CSS -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/back.jpg'); /* Path to your background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333; /* Text color */
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px; /* Limit container width */
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.6); /* More transparent background */
+            transition: all 0.5s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+
+        .sidebar {
+            background-color: rgba(34, 139, 34, 0.9); /* Sidebar background - forest green */
+            width: 300px;
+            padding: 20px;
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sidebar h2 {
+            margin: 0 0 20px; /* Adjust spacing */
+            font-size: 2rem;
+            color: #fff; /* Text color */
+        }
+
+        .sidebar p {
+            margin: 0 0 10px; /* Adjust spacing */
+            text-align: center;
+            font-size: 1.1rem;
+            color: #fff; /* Text color */
+        }
+
+        .content {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content h1 {
+            margin: 0 0 20px; /* Adjust spacing */
+            font-size: 2.5rem;
+            color: #333; /* Text color */
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+            background-color: #228B22; /* Forest green */
+            color: #fff; /* Text color */
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .tab:hover {
+            background-color: #006400; /* Darker forest green */
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        .tab.active {
+            background-color: #006400; /* Active background color */
+            transform: translateY(-2px); /* Lift active tab */
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .tab-content {
+            display: none;
+            width: 100%; /* Make content take full width */
+        }
+
+        form input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form button {
+            background-color: #228B22; /* Green button color */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        form button:hover {
+            background-color: #006400; /* Darker green on hover */
+        }
+
+        .additional-content {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .additional-content h2 {
+            margin-bottom: 20px; /* Adjust spacing */
+            font-size: 1.5rem;
+        }
+
+        .additional-content p {
+            margin-bottom: 10px; /* Adjust spacing */
+            font-size: 1.1rem;
+        }
+
+        .login-link,
+        .logout-link {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .login-link a,
+        .logout-link a {
+            color: #228B22; /* Forest green */
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .login-link a:hover,
+        .logout-link a:hover {
+            color: #006400; /* Darker forest green */
+        }
+
+        .rights-reserved {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #555; /* Gray text */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar with content about PlantCare Detect and Cure -->
+        <div class="sidebar">
+            <h2>PlantCare Detect and Cure</h2>
+            <p>Welcome to PlantCare Detect and Cure, your one-stop solution for plant health and care.</p>
+            <p>Join us in transforming the way you nurture your plants.</p>
+        </div>
+
+        <!-- Main content with register and login forms -->
+        <div class="content">
+            <h1>Welcome to PlantCare Detect and Cure</h1>
+
+            <!-- Tabs for Login and Register -->
+            <div class="tabs">
+                <div class="tab active" onclick="openTab(event, 'register')">Register</div>
+                <div class="tab" onclick="openTab(event, 'login')">Login</div>
+            </div>
+
+            <!-- Register Form -->
+            <div class="tab-content" id="register">
+                <form id="register-form" action="/" method="post">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    <button type="submit" name="register" class="btn btn-success">Register</button>
+                </form>
+            </div>
+
+            <!-- Login Form -->
+            <div class="tab-content" id="login" style="display: none;">
+                <form id="login-form" action="/" method="post">
+                    <label for="login-username-email">Username or Email:</label>
+                    <input type="text" id="login-username-email" name="username_email" required>
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" name="password" required>
+                    <button type="submit" name="login" class="btn btn-success">Login</button>
+                </form>
+            </div>
+
+            <!-- Additional Content about PlantCare Detect and Cure -->
+            <div class="additional-content">
+                <h2>Why Choose PlantCare Detect and Cure?</h2>
+                <p>Our platform offers advanced solutions for diagnosing and treating plant health issues.</p>
+                <p>Utilizing the latest technology, we provide accurate and timely diagnostics for your plants.</p>
+                <p>Secure your plants' health with our expert advice and recommendations.</p>
+                <p>Experience the best in plant care with PlantCare Detect and Cure.</p>
+            </div>
+
+            <!-- Links for Registration and Login -->
+            <div class="login-link">
+                Don't have an account? <a href="#" onclick="openTab(event, 'register')">Register here</a>.
+            </div>
+            <div class="logout-link" style="display: none;">
+                Already have an account? <a href="#" onclick="openTab(event, 'login')">Login here</a>.
+            </div>
+
+            <!-- Rights Reserved -->
+            <div class="rights-reserved">
+                &copy; 2024 PlantCare Detect and Cure. All Rights Reserved.
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap and custom scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabContent, tabLinks;
+            tabContent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+            tabLinks = document.getElementsByClassName("tab");
+            for (i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+
+            if (tabName === 'register') {
+                document.querySelector('.login-link').style.display = 'none';
+                document.querySelector('.logout-link').style.display = 'block';
+            } else {
+                document.querySelector('.login-link').style.display = 'block';
+                document.querySelector('.logout-link').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

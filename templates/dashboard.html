@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlantCare Detect and Cure Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-align: center;
+            background-image: url("/static/back.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        header {
+            background: linear-gradient(to right, #32CD32, #006400); /* Green gradient */
+            color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 10px 10px;
+            animation: fadeInDown 1s ease;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 36px;
+            letter-spacing: 1px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease;
+            text-align: justify;
+            padding: 0 20px;
+            font-weight: normal;
+        }
+
+        #content {
+            padding: 20px;
+            text-align: left;
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.7); /* Adjust transparency */
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            animation: slideInDown 1s ease;
+        }
+
+        #logout-btn {
+            text-decoration: none;
+            background: linear-gradient(to right, #e91e63, #f44336);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        #logout-btn:hover {
+            background: linear-gradient(to right, #9c27b0, #e91e63);
+        }
+
+        #logout-btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        #detect-btn {
+            text-decoration: none;
+            background: linear-gradient(to right, #228B22, #006400); /* Green gradient */
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        #detect-btn:hover {
+            background: linear-gradient(to right, #006400, #228B22); /* Darker green */
+        }
+
+        #detect-btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>PlantCare Detect and Cure Dashboard</h1>
+    </header>
+
+    <div id="content">
+        <p>Welcome to the PlantCare Detect and Cure Dashboard, <span id="username">{{ username }}</span>!</p>
+        <p>PlantCare Detect and Cure provides state-of-the-art technology to identify and address plant health issues effectively. Through our innovative platform, you can diagnose and treat your plants with precision and ease.</p>
+        <p>Our AI-driven system analyzes plant images to detect diseases and provide tailored care solutions. With a focus on sustainability and environmental responsibility, PlantCare Detect and Cure supports your gardening journey.</p>
+        <p>Explore various features within the dashboard to manage your plants, receive treatment recommendations, and access care tips for a healthier, thriving garden.</p>
+        <p>By utilizing PlantCare Detect and Cure, you can safeguard your plants and optimize their growth, ensuring a lush and beautiful garden all year round.</p>
+        <p>Start your journey with us today and unlock the full potential of your garden with PlantCare Detect and Cure.</p>
+    </div>
+
+    <a href="/logout" id="logout-btn">Logout</a>
+
+    <!-- Button for detecting plant health issues -->
+    <button id="detect-btn">Diagnose Plants</button>
+
+    <script>
+        // JavaScript to handle redirection
+        document.getElementById('detect-btn').addEventListener('click', function() {
+            window.location.href = 'http://127.0.0.1:5001';
+        });
+    </script>
+</body>
+
+</html>

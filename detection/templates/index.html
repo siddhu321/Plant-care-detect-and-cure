@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlantCare Detect & Cure</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-xx+J3kC1bVTT8OphAKI17EwvATiKHLlzfZ9r7Ro8Xx0+hcv2HQ2S9A5z9iZ/HU5ntSNq6sNZc3zEnCkqzVKkwQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+            background-image: url("/static/back.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .container {
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            width: 400px;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            animation: backgroundChange 8s infinite;
+            background-color: transparent;
+        }
+
+        .container:hover {
+            animation: none; /* Disable animation on hover */
+            transition: background 0.8s;
+            background-color: rgba(255, 255, 255, 0.4); /* More transparent white on hover */
+        }
+
+        @keyframes backgroundChange {
+            0% { background-color: rgba(255, 255, 255, 0.4); }
+            50% { background-color: rgba(255, 255, 255, 0.2); }
+            100% { background-color: rgba(255, 255, 255, 0.4); }
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease-in-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .custom-file-upload {
+            border: 2px dashed #fff;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-block;
+            padding: 15px 30px;
+            transition: all 0.3s ease-in-out;
+            animation: fadeInUp 0.8s ease-in-out;
+        }
+
+        .custom-file-upload:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background-color 0.3s ease-in-out;
+            animation: fadeInUp 0.8s ease-in-out;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 30px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-in-out forwards;
+        }
+
+        .result h2, .message {
+            color: #fff;
+            animation: fadeInUp 0.8s ease-in-out forwards;
+        }
+
+        .result img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            animation: fadeInUp 0.8s ease-in-out forwards;
+        }
+
+        .result img:hover {
+            transform: scale(1.05);
+        }
+
+        .cure-container {
+            display: none;
+            position: absolute;
+            right: 30px;
+            top: calc(50% - 150px); /* Adjust to position slightly above */
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            animation: fadeInUp 0.8s ease-in-out forwards;
+        }
+
+        .cure-heading {
+            color: #fff;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .cure-info {
+            color: #fff;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <div class="container">
+        <h1>PlantCare Detect and Cure</h1>
+        <label for="file-upload" class="custom-file-upload">
+            <i class="fas fa-cloud-upload-alt"></i> Choose Image
+        </label>
+        <form method="POST" enctype="multipart/form-data">
+            <input id="file-upload" type="file" name="file" accept="image/*">
+            <br>
+            <input type="submit" value="Detect">
+        </form>
+        <div class="result">
+            {% if predicted_class %}
+                <h2>Prediction: {{ predicted_class }} (Confidence: {{ confidence }})</h2>
+                {% if encoded_image %}
+                    <img src="data:image/jpeg;base64,{{ encoded_image }}" alt="Overlay Image">
+                {% else %}
+                    <p class="message">No overlay image available.</p>
+                {% endif %}
+            {% endif %}
+            {% if message %}
+                <p class="message">{{ message }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="cure-container">
+        <h2 class="cure-heading">Cure</h2>
+        {% if predicted_class %}
+            <p class="cure-info">{{ cure_info }}</p>
+        {% endif %}
+    </div>
+    <script>
+        // Show cure container if prediction is available
+        {% if predicted_class %}
+            document.querySelector('.cure-container').style.display = 'block';
+        {% endif %}
+    </script>
+</body>
+</html>
